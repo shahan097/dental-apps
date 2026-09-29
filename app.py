@@ -54,7 +54,7 @@ with col1:
                 file_val = st.text_input(f"File Size", value="25/04", key=f"file_{idx}")
             canal_data.append((canal_name, length_val, file_val))
             
-        dressing = st.text_input("Dressing:", value="Calcium Hydroxide paste + Cavit temp")
+        dressing = st.text_input("Dressing:", value="Calcium hydroxide/ metapex (calcium hydroxide with iodoform)/ triple antibiotic paste.")
         advice = st.text_input("Advice / Next Appointment:", value="Avoid hard food on right side. Recall after 5 days for obturation.")
 
     else:
