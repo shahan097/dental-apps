@@ -38,7 +38,7 @@ def get_canals_for_tooth(tooth_str):
 
 with col1:
     st.subheader("Clinical Inputs")
-    tooth_number = st.text_input("Tooth Number (FDI):", value="16")
+    tooth_number = st.text_input("Tooth Number (FDI):", value="36")
     
     if procedure == "Root Canal Treatment (RCT)":
         canals = get_canals_for_tooth(tooth_number)
@@ -54,8 +54,23 @@ with col1:
                 file_val = st.text_input(f"File Size", value="25/04", key=f"file_{idx}")
             canal_data.append((canal_name, length_val, file_val))
             
-        dressing = st.text_input("Dressing:", value="Calcium hydroxide/ metapex (calcium hydroxide with iodoform)/ triple antibiotic paste.")
-        advice = st.text_input("Advice / Next Appointment:", value="Avoid hard food on right side. Recall after 5 days for obturation.")
+        # Dressing selection dropdown
+        dressing_choice = st.selectbox(
+            "Select Dressing:",
+            [
+                "Calcium Hydroxide",
+                "Metapex (calcium hydroxide with iodoform)",
+                "Triple antibiotic paste",
+                "Other / Custom"
+            ]
+        )
+        
+        if dressing_choice == "Other / Custom":
+            dressing = st.text_input("Enter Custom Dressing:", value="")
+        else:
+            dressing = dressing_choice
+
+        advice = st.text_input("Advice / Next Appointment:", value="Avoid chewing hard foods on treated side. Recall for next visit.")
 
     else:
         rest_class = st.text_input("Class / Surface:", value="Class II (MOD)")
@@ -86,6 +101,6 @@ with col2:
     # Text area for easy copying
     st.text_area("Generated Note (Select All & Copy):", value=note_text, height=260)
     
-    # Direct code snippet with built-in copy icon
-    st.markdown("**Click top-right copy icon below to copy directly:**")
+    # Direct code snippet with built-in 1-click copy icon
+    st.markdown("**Click top-right icon below to copy directly:**")
     st.code(note_text, language="text")
